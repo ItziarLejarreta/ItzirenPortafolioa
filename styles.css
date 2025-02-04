@@ -1,0 +1,223 @@
+@import url('https://fonts.googleapis.com/css2?family=Caveat:wght@400;700&display=swap');
+@import url('https://fonts.cdnfonts.com/css/bariol');
+
+html, body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    overflow-x: hidden; /* Evita el desplazamiento horizontal */
+}
+
+body {
+    font-family: 'Bariol', sans-serif;
+    background-color: #008080;
+    display: flex;
+    flex-direction: column;
+}
+
+header {
+    position: relative;
+    padding: .5vw;
+    background-color: #00000045;
+    border-bottom: 0.2vw solid #5FBFBF;
+    box-shadow: 0 0.4vw 0.8vw rgba(0, 0, 0, 0.5);
+    z-index: 10; /* Asegura que el encabezado esté por encima del video */
+}
+
+.buruKontainer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    text-align: center;
+    flex-wrap: wrap;
+    padding-left: 2vw;
+    padding-right: 2vw;
+}
+
+header h1, header h2 {
+    margin: 0;
+    color: #5FBFBF;
+    text-shadow: 0.1vw 0.1vw 0.2vw rgba(0, 0, 0, 0.5);
+}
+
+header h1 {
+    font-size: 3vw;
+}
+
+header h2 {
+    font-size: 2vw;
+}
+
+.logoKontainer {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 5vw;
+    height: 5vw;
+    border-radius: 50%;
+    border: 0.5vw solid rgba(0, 0, 0, 0.5);
+    background-color: #5FBFBF;
+    overflow: hidden;
+    box-shadow: inset 0 0 0.5vw rgba(0, 0, 0, 0.3), 0 0 1vw rgba(0, 0, 0, 0.5), inset 0 0 1.5vw rgba(0, 0, 0, 0.2);
+}
+
+.logoKontainer::before {
+    content: "";
+    position: absolute;
+    width: 110%;
+    height: 110%;
+    border: 0.5vw solid rgba(0, 0, 0, 0.5);
+    border-radius: 50%;
+    box-shadow: 0 0 1.5vw rgba(0, 0, 0, 0.2);
+    background-color: #5FBFBF;
+    z-index: -1;
+}
+
+.logoKontainer img {
+    transition: opacity 0.5s ease, transform 0.3s ease;
+    position: absolute;
+}
+
+.logo {
+    width: 80%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    opacity: 1;
+}
+
+.logoHover {
+    width: 110%;
+    top: 55%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    opacity: 0;
+    filter: brightness(1.1);
+}
+
+.logoKontainer:hover .logo {
+    opacity: 0;
+}
+
+.logoKontainer:hover .logoHover {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+    transition: transform 0.3s ease, opacity 0.5s ease;
+}
+
+.logoKontainer {
+    animation: pulse 3s infinite ease-in-out;
+}
+  
+@keyframes pulse {
+    0%, 100% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(0.9);
+    }
+}
+
+.izenburua {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0;
+    text-align: center;
+}
+
+.esaldiKontainer {
+    padding-bottom: 1.5vw;
+    margin: 1vw;
+    position: relative;
+    display: inline-block;
+    background-color: rgba(0, 0, 0, 0.42);
+    max-width: 30vw;
+    border: 0.3vw solid #008080;
+    box-shadow: 0.5vw 0.5vw 1vw rgba(0, 0, 0, 0.5);
+}
+
+.esaldi {
+    font-family: "Caveat", serif;
+    color:#5FBFBF;
+    margin: .5vw;
+    font-size: 2vw;
+}
+
+.sareKontainer {
+    display: flex;
+    flex-direction: row;
+    position: absolute;
+    padding-left: 7.5vw;
+}
+
+.sareBotoia {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 2vw;
+    height: 2vw;
+    margin: 0.5vw;
+    border: 0.3vw solid #008080;
+    border-radius: 30%;
+    background-color: #005050;
+    box-shadow: inset 0 0 0.5vw rgba(0, 0, 0, 0.3), 0 0 1vw rgba(0, 0, 0, 0.5), inset 0 0 1.5vw rgba(0, 0, 0, 0.2);
+}
+
+.sareBotoia img {
+    width: 1.5vw;
+    height: 1.5vw;
+}
+
+.sarea:hover {
+    box-shadow: 0 0 1vw #00ffff, 0 0 1vw #00ffff;
+    transform: scale(1.2);
+}
+
+main {
+    flex: 1; /* Permite que el main crezca y ocupe el espacio disponible */
+    display: flex;
+    padding: 2vw;
+    width: 100%;
+    box-sizing: border-box; /* Incluye el padding en el cálculo del ancho total */
+    overflow-y: auto; /* Permite el desplazamiento vertical */
+}
+
+.background-video {
+    position: fixed;
+    top: 0;
+    left: 0;
+    overflow: hidden;
+    padding-top: 10vw;
+}
+
+.background-video video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.contenido {
+    position: relative;
+    margin-left: auto;
+    width: 20%;
+    padding: .5vw;
+    background: rgba(0, 0, 0, 0.5); /* Fondo semitransparente */
+    color: white;
+    display: flex;
+    flex-direction: column;
+}
+
+.atala {
+    margin-bottom: 0px;
+}
+
+.atala video {
+    width: 100%;
+    height: auto;
+    border-radius: 0.8vw;
+    border: 0.3vw solid #008080;
+    box-shadow: 0.5vw 0.5vw 1vw rgba(0, 0, 0, 0.5);
+}
