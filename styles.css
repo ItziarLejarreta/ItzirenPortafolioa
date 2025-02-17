@@ -1,66 +1,91 @@
 @import url('https://fonts.googleapis.com/css2?family=Caveat:wght@400;700&display=swap');
 @import url('https://fonts.cdnfonts.com/css/bariol');
+@font-face {
+    font-family: 'Chicago';
+    src: url('Materiala_PortfolioItzi/ChicagoFLF.ttf') format('truetype'); 
+    font-weight: normal; 
+    font-style: normal;
+}
 
 html, body {
     margin: 0;
     padding: 0;
-    width: 100%;
-    height: 100%;
-    overflow-x: hidden; /* Evita el desplazamiento horizontal */
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
 }
 
 body {
     font-family: 'Bariol', sans-serif;
     background-color: #008080;
     display: flex;
-    flex-direction: column;
-}
-
-header {
-    position: relative;
-    padding: .5vw;
-    background-color: #00000045;
-    border-bottom: 0.2vw solid #5FBFBF;
-    box-shadow: 0 0.4vw 0.8vw rgba(0, 0, 0, 0.5);
-    z-index: 10; /* Asegura que el encabezado esté por encima del video */
-}
-
-.buruKontainer {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    text-align: center;
-    flex-wrap: wrap;
-    padding-left: 2vw;
-    padding-right: 2vw;
-}
-
-header h1, header h2 {
+    flex-direction: row;
     margin: 0;
-    color: #5FBFBF;
-    text-shadow: 0.1vw 0.1vw 0.2vw rgba(0, 0, 0, 0.5);
+    position: absolute;
 }
 
-header h1 {
-    font-size: 3vw;
-}
-
-header h2 {
-    font-size: 2vw;
-}
-
-.logoKontainer {
-    position: relative;
+.orrialdea {
+    width: 100%;
+    height: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 5vw;
-    height: 5vw;
+    transition: opacity 0.5s ease-in-out;
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0;
+}
+
+.orrialdea.active {
+    opacity: 1;
+    position: relative;
+}
+
+.backgroundBideoa {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    overflow: hidden;
+}
+
+.backgroundBideoa video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.infoKontainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    width: 35%;
+    height: 100vh;
+    position: absolute;
+    top: 0;
+    left: 7vw;
+    margin: 0;
+    background-color: #008080;
+}
+
+.logoKontainer {
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    top: 1vw;
+    width: 9vw;
+    height: 9vw;
     border-radius: 50%;
-    border: 0.5vw solid rgba(0, 0, 0, 0.5);
+    border: 0.5vw solid #008080;
     background-color: #5FBFBF;
     overflow: hidden;
     box-shadow: inset 0 0 0.5vw rgba(0, 0, 0, 0.3), 0 0 1vw rgba(0, 0, 0, 0.5), inset 0 0 1.5vw rgba(0, 0, 0, 0.2);
+    z-index: 1;
 }
 
 .logoKontainer::before {
@@ -72,7 +97,6 @@ header h2 {
     border-radius: 50%;
     box-shadow: 0 0 1.5vw rgba(0, 0, 0, 0.2);
     background-color: #5FBFBF;
-    z-index: -1;
 }
 
 .logoKontainer img {
@@ -97,10 +121,6 @@ header h2 {
     filter: brightness(1.1);
 }
 
-.logoKontainer:hover .logo {
-    opacity: 0;
-}
-
 .logoKontainer:hover .logoHover {
     opacity: 1;
     transform: translate(-50%, -50%) scale(1);
@@ -110,114 +130,119 @@ header h2 {
 .logoKontainer {
     animation: pulse 3s infinite ease-in-out;
 }
-  
+
 @keyframes pulse {
     0%, 100% {
-      transform: scale(1);
+        transform: scale(1);
     }
     50% {
-      transform: scale(0.9);
+        transform: scale(0.9);
     }
-}
-
-.izenburua {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin: 0;
-    text-align: center;
 }
 
 .esaldiKontainer {
-    padding-bottom: 1.5vw;
-    margin: 1vw;
-    position: relative;
-    display: inline-block;
-    background-color: rgba(0, 0, 0, 0.42);
-    max-width: 30vw;
-    border: 0.3vw solid #008080;
-    box-shadow: 0.5vw 0.5vw 1vw rgba(0, 0, 0, 0.5);
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    justify-content: flex-end;
+    padding: 1.5vw;
+    top: 6vw;
+    background-color: rgba(0, 0, 0, 0.281);
 }
 
 .esaldi {
     font-family: "Caveat", serif;
-    color:#5FBFBF;
-    margin: .5vw;
-    font-size: 2vw;
+    color: #5FBFBF;
+    font-size: 2.9vw;
 }
 
 .sareKontainer {
     display: flex;
-    flex-direction: row;
-    position: absolute;
-    padding-left: 7.5vw;
+    flex-direction: row; /* Cambiado a fila */
+    justify-content: center;
+    align-items: center;
+    margin-top: 19vw;
 }
 
 .sareBotoia {
     display: flex;
-    justify-content: center;
     align-items: center;
-    width: 2vw;
-    height: 2vw;
-    margin: 0.5vw;
-    border: 0.3vw solid #008080;
-    border-radius: 30%;
-    background-color: #005050;
-    box-shadow: inset 0 0 0.5vw rgba(0, 0, 0, 0.3), 0 0 1vw rgba(0, 0, 0, 0.5), inset 0 0 1.5vw rgba(0, 0, 0, 0.2);
+    margin: 0.5vw; /* Espacio entre los enlaces */
+    z-index: 1;
+    text-decoration: none; /* Elimina la línea de subrayado en los enlaces */
+    cursor: pointer; /* Cambia el cursor cuando el ratón se acerca */
 }
 
 .sareBotoia img {
     width: 1.5vw;
     height: 1.5vw;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.sarea:hover {
-    box-shadow: 0 0 1vw #00ffff, 0 0 1vw #00ffff;
-    transform: scale(1.2);
+.sareBotoia span {
+    margin-left: 0.5vw; /* Espacio entre el icono y el texto */
+    color: #5FBFBF; /* Color del texto */
+    font-size: 1.5vw; /* Tamaño del texto */
 }
 
-main {
-    flex: 1; /* Permite que el main crezca y ocupe el espacio disponible */
+.sareBotoia:hover {
+    transform: scale(1.1); /* Ajuste de escala al hacer hover */
+}
+
+.idazMakina {
     display: flex;
-    padding: 2vw;
-    width: 100%;
-    box-sizing: border-box; /* Incluye el padding en el cálculo del ancho total */
-    overflow-y: auto; /* Permite el desplazamiento vertical */
-}
-
-.background-video {
-    position: fixed;
-    top: 0;
-    left: 0;
+    flex-direction: column; /* Cambiado a columna para que los spans se apilen verticalmente */
+    position: absolute;
+    right: 10vw;
+    width: 45vw;
+    height: 100vh;
     overflow: hidden;
-    padding-top: 10vw;
+    font-family: 'Chicago';
+    font-size: .45vw;
+    line-height: 1.9;
+    color: #C0C0C0;
+    z-index: 1;
+    white-space: pre-wrap; /* Preserva los saltos de línea y espacios */
 }
 
-.background-video video {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
+.idazMakina span {
+    border-right: .5vw solid #5FBFBF; /* Cursor aplicado a cada span */
+    animation: blink-caret 0.75s step-end infinite;
 }
 
-.contenido {
-    position: relative;
-    margin-left: auto;
-    width: 20%;
-    padding: .5vw;
-    background: rgba(0, 0, 0, 0.5); /* Fondo semitransparente */
-    color: white;
-    display: flex;
-    flex-direction: column;
+@keyframes blink-caret {
+    from, to {
+        border-color: transparent;
+    }
+    50% {
+        border-color: #5FBFBF;
+    }
 }
 
-.atala {
-    margin-bottom: 0px;
-}
-
-.atala video {
-    width: 100%;
-    height: auto;
+.edukiKontainer {
+    position: absolute;
+    width: 90%; /* Ajusta este valor según tus necesidades */
+    padding-bottom: 56.25%; /* Mantiene la relación de aspecto 16:9 */
+    height: 0;
+    overflow: hidden;
     border-radius: 0.8vw;
     border: 0.3vw solid #008080;
     box-shadow: 0.5vw 0.5vw 1vw rgba(0, 0, 0, 0.5);
+    margin-top: 23vw; /* Espacio entre el texto y el video */
+    cursor: pointer; /* Cambia el cursor cuando el ratón se acerca */
+    z-index: 1;
+}
+
+.edukiKontainer iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: none; /* Elimina el borde del iframe */
+    transition: transform 0.3s ease; /* Añade una transición suave para el zoom */
+}
+
+.edukiKontainer:hover iframe {
+    transform: scale(1.05); /* Efecto de zoom al hacer hover */
 }

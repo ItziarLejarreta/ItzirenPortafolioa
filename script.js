@@ -1,40 +1,26 @@
-document.addEventListener('DOMContentLoaded', function() {
-    console.log('JavaScript cargado correctamente.');
+document.addEventListener('DOMContentLoaded', () => {
+    const spans = document.querySelectorAll('.idazMakina span');
+    let delay = 0;
 
-    // Verifica si Lightbox está disponible
-    if (typeof lightbox !== 'undefined') {
-        // Inicializa Lightbox
-        lightbox.option({
-            'resizeDuration': 200,
-            'wrapAround': true
-        });
+    spans.forEach((span, index) => {
+        const text = span.textContent;
+        span.textContent = ''; // Vaciar el contenido del span
+        
+        for (let i = 0; i < text.length; i++) {
+            setTimeout(() => {
+                span.textContent += text[i];
+                if (i === text.length - 1 && index < spans.length - 1) {
+                    // Ocultar el cursor del span actual al terminar de escribir
+                    span.style.borderRight = '0.5vw solid transparent';
+                }
+            }, delay);
+            delay += 50; // Ajusta este valor para cambiar la velocidad de escritura
+        }
 
-        // Asegúrate de que todos los videos estén silenciados
-        const videos = document.querySelectorAll('video');
-        videos.forEach(video => {
-            video.muted = true;
-        });
-
-        // Ejemplo: Pausar todos los videos cuando se cierra el Lightbox
-        lightbox.on('close', function() {
-            videos.forEach(video => video.pause());
-        });
-    } else {
-        console.error('Lightbox no está definido');
-    }
-    // Animación de escritura manual
-    const text = document.querySelector('.text');
-    const characters = text.textContent.split('');
-    text.innerHTML = '';
-    
-    characters.forEach((char, i) => {
-        const span = document.createElement('span');
-        span.textContent = char;
-        span.className = 'hidden';
-        text.appendChild(span);
-
+        // Mostrar el cursor solo en el span actual
         setTimeout(() => {
-            span.classList.remove('hidden');
-        }, i * 100); // Ajusta la duración aquí (100ms por letra)
+            span.style.borderRight = '0.5vw solid #5FBFBF';
+            span.style.animation = 'blink-caret 0.75s step-end infinite';
+        }, delay);
     });
 });
