@@ -53,22 +53,25 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // 🎬 Reproducción del vídeo principal
+  // 🎬 Reproducción controlada del vídeo principal
   function controlVideoPrincipal() {
     const video = document.querySelector('.bideoNagusia video');
     if (!video) return;
 
-    // Asegurar atributos clave para autoplay en móviles
-    video.setAttribute('muted', '');
+    // Asegurar estado inicial: pausado y silenciado
+    video.pause();
+    video.muted = true;
     video.setAttribute('playsinline', '');
     video.setAttribute('preload', 'metadata');
 
-    // Reproducir o pausar al hacer clic
+    // Reproducir y quitar mute al hacer clic
     video.closest('.bideoNagusia')?.addEventListener('click', () => {
       if (video.paused) {
+        video.muted = false;
         video.play().catch(err => console.warn('Error al reproducir:', err));
       } else {
         video.pause();
+        video.muted = true;
       }
     });
 
@@ -76,6 +79,7 @@ document.addEventListener('DOMContentLoaded', () => {
     video.addEventListener('ended', () => {
       video.currentTime = 0;
       video.pause();
+      video.muted = true;
     });
   }
 
