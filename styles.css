@@ -7,18 +7,23 @@
     font-style: normal;
 }
 
-/* Base y Reset */
 html, body {
     margin: 0;
     padding: 0;
     width: 100vw;
     height: 100vh;
+    min-width: 100vw;
+    min-height: 100vh;
     overflow: hidden;
 }
 
 body {
     font-family: 'Bariol', sans-serif;
     background-color: #008080;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    position: relative;
     display: flex;
     flex-direction: row;
     opacity: 1;
@@ -41,31 +46,39 @@ body.fade-in {
     }
 }
 
-/* Contenedor principal de la página */
 .orrialdea1 {
-    display: flex;
-    flex-direction: row;
-    width: 100%;
-    height: 100%;
+  display: flex;
+  flex-direction: row;
+  width: 100vw;
+  height: 100vh;
+  position: relative;
+  z-index: 1;
 }
 
 .backgroundBideoa {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: -1;
-    object-fit: cover;
+  position: fixed;
+  top: 0; left: 0;
+  width: 100vw;
+  height: 100vh;
+  min-width: 100vw;
+  min-height: 100vh;
+  object-fit: cover;
+  z-index: -1;
+  pointer-events: none;
+  margin: 0;
+  padding: 0;
+  border: none;
+  background: black;
 }
 
 /* Contenedor de información lateral */
 .infoKontainer {
     display: flex;
-    position: relative;
     flex-direction: column;
     align-items: center;
+    justify-content: space-between;
     width: 35%;
+    height: 100vh;
     margin-left: 3vw;
     background-color: #008080;
 }
@@ -195,12 +208,15 @@ body.fade-in {
 }
 
 .sareKontainer {
-    display: flex;
-    width: 100%;
-    justify-content: center;
-    align-items: center;
-    background-color: rgba(0, 0, 0, 0.3);
+  flex-shrink: 0;
+  width: 100%;
+  height: 5vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.3);
 }
+
 
 .sareBotoia {
     display: flex;
@@ -236,6 +252,7 @@ body.fade-in {
     color: #C0C0C0;
     z-index: 1;
     white-space: pre-wrap;
+    overflow-y: auto;
 }
 
 .idazMakina span {
