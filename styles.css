@@ -282,6 +282,7 @@ body.fade-in {
 
 .bideoNagusia iframe {
     width: 100%;
+    height: auto;
     aspect-ratio: 16 / 9;
     border: .3vw solid #005B5B;
     border-radius: 0.5vw;
