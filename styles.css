@@ -69,6 +69,7 @@ body.fade-in {
 /* Contenedor de información lateral */
 .infoKontainer {
     display: flex;
+    position: relative;
     flex-direction: column;
     align-items: center;
     width: 35%;
@@ -272,20 +273,20 @@ body.fade-in {
 
 /* Vídeo principal */
 .bideoNagusia {
-    width: 100%;
+    width: 90%;
     aspect-ratio: 16 / 9;
     border: 0.3vw solid #005B5B;
     border-radius: 0.5vw;
     box-shadow: 0 0 1vw rgba(0, 0, 0, 0.3);
     cursor: pointer;
     transition: transform 0.3s ease-in-out;
-    z-index: 10;
-    overflow: hidden;
 }
 
 .bideoNagusia video {
     width: 100%;
     height: 100%;
+    position: relative;
+    z-index: 5;
 }
 
 .bideoNagusia:hover {
@@ -325,8 +326,4 @@ body.fade-in {
 .bideoNagusia:hover video,
 .bideoMiniak iframe:hover {
     filter: brightness(1);
-}
-.bideoNagusia video {
-  position: relative;
-  z-index: 10;
 }
