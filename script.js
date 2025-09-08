@@ -1,4 +1,3 @@
-<script>
 document.addEventListener('DOMContentLoaded', () => {
   // ✍️ Máquina de escribir
   const spans = document.querySelectorAll('.idazMakina span');
@@ -88,4 +87,3 @@ document.addEventListener('DOMContentLoaded', () => {
   // 🌟 Animación de entrada
   document.body.classList.add('fade-in');
 });
-</script>
