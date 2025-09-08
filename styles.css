@@ -280,6 +280,14 @@ body.fade-in {
   align-items: center;
 }
 
+.bideoNagusia {
+    width: 100%;
+    margin-bottom: 3vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 .bideoNagusia iframe {
     width: 100%;
     height: auto;
