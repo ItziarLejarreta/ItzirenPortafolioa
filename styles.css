@@ -275,17 +275,15 @@ body.fade-in {
 .bideoNagusia {
     width: 100%;
     aspect-ratio: 16 / 9;
-    border: 0.3vw solid #005B5B;
-    border-radius: 0.5vw;
-    box-shadow: 0 0 1vw rgba(0, 0, 0, 0.3);
-    cursor: pointer;
-    transition: transform 0.3s ease-in-out;
 }
 
-.bideoNagusia video {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
+.bideoNagusia iframe {
+    aspect-ratio: 16 / 9;
+    border: .3vw solid #005B5B;
+    border-radius: 0.5vw;
+    box-shadow: 0 0 0.5vw rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease-in-out;
+    cursor: pointer;
 }
 
 .bideoNagusia:hover {
@@ -316,7 +314,7 @@ body.fade-in {
 }
 
 /* Efecto de iluminación en hover */
-.bideoNagusia video,
+.bideoNagusia iframe,
 .bideoMiniak iframe {
     filter: brightness(0.6);
     transition: filter 0.3s ease-in-out;
