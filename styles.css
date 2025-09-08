@@ -271,13 +271,8 @@ body.fade-in {
   align-items: center;
 }
 
-/* Vídeo principal */
-.bideoNagusia {
-    width: 100%;
-    aspect-ratio: 16 / 9;
-}
-
 .bideoNagusia iframe {
+    width: 100%;
     aspect-ratio: 16 / 9;
     border: .3vw solid #005B5B;
     border-radius: 0.5vw;
@@ -286,7 +281,7 @@ body.fade-in {
     cursor: pointer;
 }
 
-.bideoNagusia:hover {
+.bideoNagusia iframe:hover {
     transform: scale(1.02);
     box-shadow: 0 0 2vw rgba(95, 191, 191, 0.5);
 }
@@ -320,7 +315,7 @@ body.fade-in {
     transition: filter 0.3s ease-in-out;
 }
 
-.bideoNagusia:hover video,
+.bideoNagusia iframe:hover,
 .bideoMiniak iframe:hover {
     filter: brightness(1);
 }

@@ -23,43 +23,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }, delay);
   });
 
-  // 🎞️ Animación de entrada para los vídeos
-  const iframes = document.querySelectorAll('.atalIframe');
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('visible');
-        observer.unobserve(entry.target);
-      }
-    });
-  }, { threshold: 0.2 });
 
-  iframes.forEach(iframe => {
-    observer.observe(iframe);
-  });
-
-  // 🖱️ Efecto centrado al hacer hover en los iframes
-  document.querySelectorAll('.atalIframe').forEach(iframe => {
-    let originalParent = null;
-
-    iframe.addEventListener('mouseenter', () => {
-      if (iframe.classList.contains('centrado')) return;
-      originalParent = iframe.parentElement;
-      originalParent.classList.add('desactivado');
-
-      const eduki = document.querySelector('.edukiKontainer');
-      eduki.appendChild(iframe);
-      iframe.classList.add('centrado');
-    });
-
-    iframe.addEventListener('mouseleave', () => {
-      if (originalParent) {
-        originalParent.appendChild(iframe);
-        iframe.classList.remove('centrado');
-        originalParent.classList.remove('desactivado');
-      }
-    });
-  });
 
   // 🌐 Idioma activo y transición
   const currentLang = window.location.href.includes('index-es.html') ? 'es' : 'eu';
