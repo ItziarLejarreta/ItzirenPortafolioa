@@ -2,16 +2,18 @@
 @import url('https://fonts.cdnfonts.com/css/bariol');
 @font-face {
     font-family: 'Chicago';
-    src: url('Materiala_PortfolioItzi/ChicagoFLF.ttf') format('truetype'); 
-    font-weight: normal; 
+    src: url('Materiala_PortfolioItzi/ChicagoFLF.ttf') format('truetype');
+    font-weight: normal;
     font-style: normal;
 }
 
+/* Base y Reset */
 html, body {
     margin: 0;
     padding: 0;
     width: 100vw;
     height: 100vh;
+    overflow: hidden;
 }
 
 body {
@@ -19,11 +21,11 @@ body {
     background-color: #008080;
     display: flex;
     flex-direction: row;
-    margin: 0;
     opacity: 1;
     transition: opacity 0.5s ease-in-out;
 }
 
+/* Transiciones de la página */
 body.fade-out {
     opacity: 0;
 }
@@ -39,14 +41,15 @@ body.fade-in {
     }
 }
 
-.orrialdea {
+/* Contenedor principal de la página */
+.orrialdea1 {
     width: 100%;
     height: 100%;
     display: flex;
-    flex-direction: row;
     justify-content: space-between;
 }
 
+/* Contenedor del vídeo de fondo */
 .backgroundBideoa {
     position: fixed;
     top: 0;
@@ -63,6 +66,7 @@ body.fade-in {
     object-fit: cover;
 }
 
+/* Contenedor de información lateral */
 .infoKontainer {
     display: flex;
     flex-direction: column;
@@ -74,13 +78,19 @@ body.fade-in {
     background-color: #008080;
 }
 
+/* Contenedores de botones e íconos */
+.hizkuntzaKontainer,
+.logoKontainer,
+.sareKontainer {
+    z-index: 2; /* Un z-index alto para todos los elementos de control */
+}
+
 .hizkuntzaKontainer {
     position: absolute;
     top: 1vw;
     right: 2vw;
     display: flex;
-    gap: 0.2vw; /* Espacio entre los botones */
-    z-index: 2; /* Asegura que esté por encima de otros elementos */
+    gap: 0.2vw;
 }
 
 .hizkuntzaBotoia {
@@ -94,14 +104,12 @@ body.fade-in {
     transition: background-color 0.3s, color 0.3s, transform 0.2s;
 }
 
-/* Hover solo en botones que NO están activos */
 .hizkuntzaBotoia:not(.activeLang):hover {
     background-color: #008080;
     color: #5FBFBF;
     transform: scale(1.1);
 }
 
-/* Botón activo (idioma actual) */
 .activeLang {
     background-color: #005B5B;
     color: #5FBFBF;
@@ -111,7 +119,6 @@ body.fade-in {
     cursor: default;
     transform: none;
 }
-
 
 .logoKontainer {
     position: absolute;
@@ -126,8 +133,8 @@ body.fade-in {
     background-color: #5FBFBF;
     overflow: hidden;
     box-shadow: inset 0 0 0.5vw rgba(0, 0, 0, 0.3), 0 0 1vw rgba(0, 0, 0, 0.5), inset 0 0 1.5vw rgba(0, 0, 0, 0.2);
-    z-index: 1;
-    cursor: pointer; /* Cambia el cursor cuando el ratón se acerca */
+    cursor: pointer;
+    animation: pulse 3s infinite ease-in-out;
 }
 
 .logoKontainer::before {
@@ -166,11 +173,6 @@ body.fade-in {
 .logoKontainer:hover .logoHover {
     opacity: 1;
     transform: translate(-50%, -50%) scale(1);
-    transition: transform 0.3s ease, opacity 0.5s ease;
-}
-
-.logoKontainer {
-    animation: pulse 3s infinite ease-in-out;
 }
 
 @keyframes pulse {
@@ -193,14 +195,12 @@ body.fade-in {
     border-radius: .3vw;
 }
 
-
 .esaldi {
     font-family: "Caveat", serif;
     color: #5FBFBF;
     font-size: 2.7vw;
     text-align: center;
     margin: .5vw;
-    z-index: 1;
 }
 
 .sareKontainer {
@@ -214,10 +214,10 @@ body.fade-in {
 .sareBotoia {
     display: flex;
     align-items: center;
-    margin: 0.5vw; /* Espacio entre los enlaces */
-    z-index: 1;
-    text-decoration: none; /* Elimina la línea de subrayado en los enlaces */
-    cursor: pointer; /* Cambia el cursor cuando el ratón se acerca */
+    margin: 0.5vw;
+    text-decoration: none;
+    cursor: pointer;
+    transition: transform 0.3s ease;
 }
 
 .sareBotoia img {
@@ -227,18 +227,17 @@ body.fade-in {
 }
 
 .sareBotoia span {
-    margin-left: 0.5vw; /* Espacio entre el icono y el texto */
-    color: #5FBFBF; /* Color del texto */
-    font-size: 1.1vw; /* Tamaño del texto */
+    margin-left: 0.5vw;
+    color: #5FBFBF;
+    font-size: 1.1vw;
 }
 
 .sareBotoia:hover {
-    transform: scale(1.1); /* Ajuste de escala al hacer hover */
+    transform: scale(1.1);
 }
 
 .idazMakina {
-    display: flex;
-    flex-direction: column; /* Cambiado a columna para que los spans se apilen verticalmente */
+    display: block; /* Corregido: más apropiado para el efecto */
     width: 31vw;
     height: 70vh;
     overflow: hidden;
@@ -247,11 +246,12 @@ body.fade-in {
     line-height: 1.2vw;
     color: #C0C0C0;
     z-index: 1;
-    white-space: pre-wrap; /* Preserva los saltos de línea y espacios */
+    white-space: pre-wrap;
 }
 
 .idazMakina span {
-    border-right: .5vw solid #5FBFBF; /* Cursor aplicado a cada span */
+    display: inline;
+    border-right: .5vw solid #5FBFBF;
     animation: blink-caret 0.75s step-end infinite;
 }
 
@@ -264,73 +264,70 @@ body.fade-in {
     }
 }
 
+/* Contenedor de los vídeos */
 .bideoKontainer {
-  display: flex;
-  flex-direction: column;
-  width: 100vw;
-  height: 100vh;
-  padding: 2vw;
-  box-sizing: border-box;
-  justify-content: center;
-  align-items: center;
-  gap: 2vh;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    padding: 2vw;
+    box-sizing: border-box;
+    justify-content: center;
+    align-items: center;
+    gap: 2vh;
 }
 
-/* 📺 Estilo para el vídeo principal */
+/* Vídeo principal */
 .bideoNagusia {
-  width: 100%;
-  aspect-ratio: 16 / 9;
-  overflow: hidden;
-  border: 0.3vw solid #005B5B;
-  border-radius: 0.5vw;
-  box-shadow: 0 0 1vw rgba(0, 0, 0, 0.3);
-  cursor: pointer;
-  transition: transform 0.3s ease-in-out;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    overflow: hidden;
+    border: 0.3vw solid #005B5B;
+    border-radius: 0.5vw;
+    box-shadow: 0 0 1vw rgba(0, 0, 0, 0.3);
+    cursor: pointer;
+    transition: transform 0.3s ease-in-out;
 }
 
 .bideoNagusia video {
-  width: 100%;
-  height: 100%;
+    width: 100%;
+    height: 100%;
 }
 
-/* 🖱️ Hover con efecto de zoom y cursor */
 .bideoNagusia:hover {
-  transform: scale(1.02);
-  box-shadow: 0 0 2vw rgba(95, 191, 191, 0.5);
+    transform: scale(1.02);
+    box-shadow: 0 0 2vw rgba(95, 191, 191, 0.5);
 }
 
-/* 🎞️ Miniaturas en fila */
+/* Miniaturas de vídeo */
 .bideoMiniak {
-  display: flex;
-  justify-content: center;
-  width: 95%;
-  gap: 2vw;
+    display: flex;
+    justify-content: center;
+    width: 95%;
+    gap: 2vw;
 }
 
 .bideoMiniak iframe {
-  width: 32%;
-  aspect-ratio: 16 / 9;
-  border: .3vw solid #005B5B;
-  border-radius: 0.5vw;
-  box-shadow: 0 0 0.5vw rgba(0, 0, 0, 0.2);
-  transition: transform 0.3s ease-in-out;
-  cursor: pointer;
+    width: 32%;
+    aspect-ratio: 16 / 9;
+    border: .3vw solid #005B5B;
+    border-radius: 0.5vw;
+    box-shadow: 0 0 0.5vw rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease-in-out;
+    cursor: pointer;
 }
 
 .bideoMiniak iframe:hover {
-  transform: scale(1.05);
+    transform: scale(1.05);
 }
 
-/* 🌑 Oscurecer vídeos por defecto */
+/* Efecto de iluminación en hover */
 .bideoNagusia video,
 .bideoMiniak iframe {
-  filter: brightness(0.6);
-  transition: filter 0.3s ease-in-out;
+    filter: brightness(0.6);
+    transition: filter 0.3s ease-in-out;
 }
 
-/* 💡 Iluminar al hacer hover */
 .bideoNagusia:hover video,
 .bideoMiniak iframe:hover {
-  filter: brightness(1);
+    filter: brightness(1);
 }
-
