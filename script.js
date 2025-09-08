@@ -53,33 +53,36 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // 🎬 Reproducción controlada del vídeo principal
-  function controlVideoPrincipal() {
-    const video = document.querySelector('.bideoNagusia video');
+  // 🎥 Reproducción automática del vídeo de fondo
+  function controlVideoFondo() {
+    const video = document.querySelector('.backgroundBideoa video');
     if (!video) return;
 
-    // Asegurar estado inicial: pausado y silenciado
+    video.setAttribute('autoplay', '');
+    video.setAttribute('muted', '');
+    video.setAttribute('loop', '');
+    video.setAttribute('playsinline', '');
+
+    video.muted = true;
+    video.play().catch(err => console.warn('Autoplay bloqueado en fondo:', err));
+  }
+
+  // 🎬 Reproducción controlada del vídeo principal
+  function controlVideoPrincipal() {
+    const video = document.getElementById('bideoNagusiaVideo');
+    if (!video) return;
+
     video.pause();
     video.muted = true;
-    video.setAttribute('playsinline', '');
-    video.setAttribute('preload', 'metadata');
 
-    // Reproducir y quitar mute al hacer clic
     video.closest('.bideoNagusia')?.addEventListener('click', () => {
       if (video.paused) {
         video.muted = false;
-        video.play().catch(err => console.warn('Error al reproducir:', err));
+        video.play();
       } else {
         video.pause();
         video.muted = true;
       }
-    });
-
-    // Reiniciar al terminar
-    video.addEventListener('ended', () => {
-      video.currentTime = 0;
-      video.pause();
-      video.muted = true;
     });
   }
 
@@ -87,6 +90,7 @@ document.addEventListener('DOMContentLoaded', () => {
   maquinaDeEscribir();
   gestionIdioma();
   controlVideoPrincipal();
+  controlVideoFondo();
 
   document.body.classList.add('fade-in');
 });
