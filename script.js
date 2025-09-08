@@ -1,121 +1,138 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // ✍️ Máquina de escribir
-    const spans = document.querySelectorAll('.idazMakina span');
-    let delay = 0;
 
-    spans.forEach((span, index) => {
-        const text = span.textContent;
-        span.textContent = '';
-        for (let i = 0; i < text.length; i++) {
+    // ✍️ Máquina de escribir
+    function maquinaDeEscribir() {
+        const spans = document.querySelectorAll('.idazMakina span');
+        if (spans.length === 0) return; // Salir si no hay elementos
+
+        let totalDelay = 0;
+
+        spans.forEach((span, index) => {
+            const text = span.textContent;
+            span.textContent = ''; // Limpiar el texto inicial
+            let charDelay = 0;
+
+            for (let i = 0; i < text.length; i++) {
+                setTimeout(() => {
+                    span.textContent += text[i];
+                    // El cursor se maneja en el CSS, por lo que esta lógica no es necesaria aquí.
+                }, totalDelay + charDelay);
+                charDelay += 50;
+            }
+
+            // Aplica el cursor intermitente al terminar cada span
+            // Y quita la animación una vez que todos los spans han terminado
             setTimeout(() => {
-                span.textContent += text[i];
-                // Quita el cursor intermitente cuando termina la palabra, excepto en la última
-                if (i === text.length - 1 && index < spans.length - 1) {
-                    span.style.borderRight = '0.5vw solid transparent';
+                span.style.animation = 'blink-caret 0.75s step-end infinite';
+
+                if (index === spans.length - 1) {
+                    // Si es el último span, deja el cursor al final
+                    span.style.borderRight = '0.5vw solid #5FBFBF';
+                    span.style.animationPlayState = 'running';
                 }
-            }, delay);
-            delay += 50;
-        }
-        // Aplica el cursor intermitente al terminar la última palabra
-        setTimeout(() => {
-            span.style.borderRight = '0.5vw solid #5FBFBF';
-            span.style.animation = 'blink-caret 0.75s step-end infinite';
-        }, delay);
-    });
+            }, totalDelay + charDelay);
+            
+            totalDelay += charDelay;
+        });
+    }
 
     // 🎞️ Animación de entrada para los vídeos
-    const iframes = document.querySelectorAll('.atalIframe');
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('visible');
-                observer.unobserve(entry.target);
-            }
+    function animacionVideos() {
+        const iframes = document.querySelectorAll('.atalIframe');
+        if (iframes.length === 0) return;
+
+        const observer = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.2 });
+
+        iframes.forEach(iframe => {
+            observer.observe(iframe);
         });
-    }, { threshold: 0.2 });
+    }
 
-    iframes.forEach(iframe => {
-        observer.observe(iframe);
-    });
-
-    // 🖱️ Efecto centrado al hacer hover en los iframes (Refactorizado para mejor estabilidad)
-    document.querySelectorAll('.atalIframe').forEach(iframe => {
-        // Almacenar el padre original de forma segura
-        const originalParent = iframe.parentElement; 
+    // 🖱️ Efecto centrado al hacer hover en los iframes (Refactorizado)
+    function efectoHoverIframes() {
+        const atalIframes = document.querySelectorAll('.atalIframe');
         const eduki = document.querySelector('.edukiKontainer');
+        if (atalIframes.length === 0 || !eduki) return;
 
-        iframe.addEventListener('mouseenter', () => {
-            if (iframe.classList.contains('centrado')) return;
-            
-            // Mover al contenedor superior para centrar
-            eduki.appendChild(iframe);
-            originalParent.classList.add('desactivado');
-            iframe.classList.add('centrado');
-        });
+        atalIframes.forEach(iframe => {
+            const originalParent = iframe.parentElement;
 
-        iframe.addEventListener('mouseleave', () => {
-            if (originalParent) {
-                // Regresar al padre original
-                originalParent.appendChild(iframe);
-                iframe.classList.remove('centrado');
-                originalParent.classList.remove('desactivado');
-            }
+            iframe.addEventListener('mouseenter', () => {
+                if (iframe.classList.contains('centrado')) return;
+                
+                originalParent.classList.add('desactivado');
+                eduki.appendChild(iframe);
+                iframe.classList.add('centrado');
+            });
+
+            iframe.addEventListener('mouseleave', () => {
+                if (originalParent) {
+                    originalParent.appendChild(iframe);
+                    iframe.classList.remove('centrado');
+                    originalParent.classList.remove('desactivado');
+                }
+            });
         });
-    });
+    }
 
     // 🌐 Idioma activo y transición
-    // Determina el idioma basándose en 'index-es.html' o 'index.html' (por defecto Euskera 'eu')
-    const currentLang = window.location.href.includes('index-es.html') ? 'es' : 'eu';
-    localStorage.setItem('idiomaElegido', currentLang);
+    function gestionIdioma() {
+        const currentPath = window.location.pathname.includes('index-es.html') ? 'es' : 'eu';
+        localStorage.setItem('idiomaElegido', currentPath);
 
-    document.querySelectorAll('.hizkuntzaBotoia').forEach(button => {
-        const lang = button.textContent.trim().toLowerCase();
-        
-        // Desactivar el botón del idioma actual
-        if (lang === currentLang) {
-            button.classList.add('activeLang');
-            button.disabled = true;
-        }
+        document.querySelectorAll('.hizkuntzaBotoia').forEach(button => {
+            const lang = button.textContent.trim().toLowerCase();
+            if (lang === currentPath) {
+                button.classList.add('activeLang');
+                button.disabled = true;
+            }
 
-        button.addEventListener('click', (e) => {
-            e.preventDefault();
-            // Priorizar data-target, si no existe, usar el antiguo onclick
-            const target = button.getAttribute('data-target') || 
-                           (button.getAttribute('onclick')?.split("'")[1]); 
-            
-            if (!target) return; // Salir si no hay URL de destino
-
-            document.body.classList.add('fade-out');
-            setTimeout(() => {
-                window.location.href = target;
-            }, 500);
+            button.addEventListener('click', (e) => {
+                e.preventDefault();
+                const targetUrl = (lang === 'es' ? 'index-es.html' : 'index.html');
+                
+                document.body.classList.add('fade-out');
+                setTimeout(() => {
+                    window.location.href = targetUrl;
+                }, 500);
+            });
         });
-    });
+    }
 
     // 🎬 Control de reproducción del vídeo principal
-    const videoContainer = document.querySelector('.bideoNagusia');
-    // Asegurarse de que el elemento 'video' existe
-    if (videoContainer) {
+    function controlVideoPrincipal() {
+        const videoContainer = document.querySelector('.bideoNagusia');
+        if (!videoContainer) return;
         const video = videoContainer.querySelector('video');
-    
+
         videoContainer.addEventListener('click', () => {
             if (video && video.paused) {
                 video.play();
             }
         });
 
-        // Asegurar loop manual (ya que loop en HTML puede tener problemas en algunos navegadores)
         if (video) {
             video.addEventListener('ended', () => {
                 video.currentTime = 0;
                 video.pause();
-                // Opcional: Si quieres que empiece a reproducirse de nuevo sin clic, usa video.play()
             });
         }
     }
 
+    // Llamadas a las funciones
+    maquinaDeEscribir();
+    animacionVideos();
+    efectoHoverIframes();
+    gestionIdioma();
+    controlVideoPrincipal();
+
     // Animación de entrada
     document.body.classList.add('fade-in');
-
-    
 });
