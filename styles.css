@@ -43,9 +43,12 @@ body.fade-in {
 
 /* Contenedor principal de la página */
 .orrialdea1 {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    overflow: hidden;
     width: 100%;
     height: 100%;
-    display: flex;
 }
 
 /* Contenedor del vídeo de fondo */
@@ -70,9 +73,7 @@ body.fade-in {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: space-between;
-    width: 35vw;
-    height: 100vh;
+    width: 35%;
     margin-left: 3vw;
     background-color: #008080;
 }
@@ -188,7 +189,6 @@ body.fade-in {
     justify-content: center;
     align-items: flex-end;
     margin-top: 9vh;
-    width: 31vw;
     height: 13vh;
     background-color: rgba(0, 0, 0, 0.281);
     border-radius: .3vw;
@@ -236,10 +236,8 @@ body.fade-in {
 }
 
 .idazMakina {
-    display: block; /* Corregido: más apropiado para el efecto */
-    width: 31vw;
-    height: 70vh;
-    overflow: hidden;
+    display: flex; /* Corregido: más apropiado para el efecto */
+    width: 90%;
     font-family: 'Chicago';
     font-size: .40vw;
     line-height: 1.2vw;
@@ -265,18 +263,13 @@ body.fade-in {
 
 /* Contenedor de los vídeos */
 .bideoKontainer {
-    display: flex;
-    flex-direction: column;
-    position: relative;
-    justify-content: center;
-    width:100%;
-    gap: 2vh;
-    align-items: center;
-    justify-content: center;
-    margin-top: 5vh;
-    margin-left: -15vw;
-    margin-right: 3vw;
-    z-index: 1;
+  width: 65%;
+  padding: 5vw;
+  gap: 2vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 /* Vídeo principal */
