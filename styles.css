@@ -68,17 +68,17 @@ justify-content: space-between;
     object-fit: cover;
 }
 
-/* Contenedor de información lateral */
 .infoKontainer {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-between;
-    width: 35vw;
-    height: 100vh;
-    margin-left: 3vw;
-    background-color: #008080;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start; /* en vez de space-between */
+  width: 35%;
+  padding: 2vh 0;
+  background-color: #008080;
+  overflow-y: auto;
 }
+
 
 /* Contenedores de botones e íconos */
 .hizkuntzaKontainer,
