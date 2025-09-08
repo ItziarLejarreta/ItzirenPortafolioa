@@ -18,10 +18,8 @@ html, body {
 
 body {
     font-family: 'Bariol', sans-serif;
-    background-color: #008080;
     display: flex;
     flex-direction: row;
-    opacity: 1;
     transition: opacity 0.5s ease-in-out;
 }
 
