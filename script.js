@@ -46,7 +46,9 @@ document.addEventListener('DOMContentLoaded', () => {
         e.preventDefault();
         const targetUrl = lang === 'es' ? 'index-es.html' : 'index.html';
         document.body.classList.add('fade-out');
-        setTimeout(() => window.location.href = targetUrl, 500);
+        setTimeout(() => {
+          window.location.href = targetUrl;
+        }, 500);
       });
     });
   }
@@ -56,21 +58,21 @@ document.addEventListener('DOMContentLoaded', () => {
     const video = document.querySelector('.bideoNagusia video');
     if (!video) return;
 
+    // Asegurar atributos clave para autoplay en móviles
     video.setAttribute('muted', '');
     video.setAttribute('playsinline', '');
     video.setAttribute('preload', 'metadata');
 
-    const container = video.closest('.bideoNagusia');
-    if (container) {
-      container.addEventListener('click', () => {
-        if (video.paused) {
-          video.play().catch(err => console.warn('Error al reproducir:', err));
-        } else {
-          video.pause();
-        }
-      });
-    }
+    // Reproducir o pausar al hacer clic
+    video.closest('.bideoNagusia')?.addEventListener('click', () => {
+      if (video.paused) {
+        video.play().catch(err => console.warn('Error al reproducir:', err));
+      } else {
+        video.pause();
+      }
+    });
 
+    // Reiniciar al terminar
     video.addEventListener('ended', () => {
       video.currentTime = 0;
       video.pause();
