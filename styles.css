@@ -274,7 +274,6 @@ body.fade-in {
 .bideoKontainer {
   width: 65%;
   padding: 5vw;
-  gap: 2vw;
   display: flex;
   flex-direction: column;
   justify-content: center;
