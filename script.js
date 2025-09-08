@@ -1,96 +1,91 @@
+<script>
 document.addEventListener('DOMContentLoaded', () => {
   // ✍️ Máquina de escribir
-  function maquinaDeEscribir() {
-    const spans = document.querySelectorAll('.idazMakina span');
-    if (!spans.length) return;
+  const spans = document.querySelectorAll('.idazMakina span');
+  let delay = 0;
 
-    let totalDelay = 0;
+  spans.forEach((span, index) => {
+    const text = span.textContent;
+    span.textContent = '';
 
-    spans.forEach((span, index) => {
-      const text = span.textContent;
-      span.textContent = '';
-      let charDelay = 0;
+    for (let i = 0; i < text.length; i++) {
+      setTimeout(() => {
+        span.textContent += text[i];
+        if (i === text.length - 1 && index < spans.length - 1) {
+          span.style.borderRight = '0.5vw solid transparent';
+        }
+      }, delay);
+      delay += 50;
+    }
 
-      for (let i = 0; i < text.length; i++) {
-        setTimeout(() => {
-          span.textContent += text[i];
-        }, totalDelay + charDelay);
-        charDelay += 50;
+    setTimeout(() => {
+      span.style.borderRight = '0.5vw solid #5FBFBF';
+      span.style.animation = 'blink-caret 0.75s step-end infinite';
+    }, delay);
+  });
+
+  // 🎞️ Animación de entrada para los vídeos
+  const iframes = document.querySelectorAll('.atalIframe');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
       }
+    });
+  }, { threshold: 0.2 });
+
+  iframes.forEach(iframe => {
+    observer.observe(iframe);
+  });
+
+  // 🖱️ Efecto centrado al hacer hover en los iframes
+  document.querySelectorAll('.atalIframe').forEach(iframe => {
+    let originalParent = null;
+
+    iframe.addEventListener('mouseenter', () => {
+      if (iframe.classList.contains('centrado')) return;
+      originalParent = iframe.parentElement;
+      originalParent.classList.add('desactivado');
+
+      const eduki = document.querySelector('.edukiKontainer');
+      eduki.appendChild(iframe);
+      iframe.classList.add('centrado');
+    });
+
+    iframe.addEventListener('mouseleave', () => {
+      if (originalParent) {
+        originalParent.appendChild(iframe);
+        iframe.classList.remove('centrado');
+        originalParent.classList.remove('desactivado');
+      }
+    });
+  });
+
+  // 🌐 Idioma activo y transición
+  const currentLang = window.location.href.includes('index-es.html') ? 'es' : 'eu';
+  localStorage.setItem('idiomaElegido', currentLang);
+
+  document.querySelectorAll('.hizkuntzaBotoia').forEach(button => {
+    const lang = button.textContent.trim().toLowerCase();
+
+    if (lang === currentLang) {
+      button.classList.add('activeLang');
+      button.disabled = true;
+    }
+
+    button.addEventListener('click', (e) => {
+      e.preventDefault();
+      const target = button.getAttribute('onclick').split("'")[1];
+      document.body.classList.add('fade-out');
 
       setTimeout(() => {
-        span.style.animation = 'blink-caret 0.75s step-end infinite';
-        if (index === spans.length - 1) {
-          span.style.borderRight = '0.5vw solid #5FBFBF';
-          span.style.animationPlayState = 'running';
-        }
-      }, totalDelay + charDelay);
-
-      totalDelay += charDelay;
+        window.location.href = target;
+      }, 500);
     });
-  }
+  });
 
-  // 🌐 Gestión de idioma y transición
-  function gestionIdioma() {
-    const currentPath = window.location.pathname.includes('index-es.html') ? 'es' : 'eu';
-    localStorage.setItem('idiomaElegido', currentPath);
-
-    document.querySelectorAll('.hizkuntzaBotoia').forEach(button => {
-      const lang = button.textContent.trim().toLowerCase();
-      if (lang === currentPath) {
-        button.classList.add('activeLang');
-        button.disabled = true;
-      }
-
-      button.addEventListener('click', e => {
-        e.preventDefault();
-        const targetUrl = lang === 'es' ? 'index-es.html' : 'index.html';
-        document.body.classList.add('fade-out');
-        setTimeout(() => {
-          window.location.href = targetUrl;
-        }, 500);
-      });
-    });
-  }
-
-  // 🎥 Reproducción automática del vídeo de fondo
-  function controlVideoFondo() {
-    const video = document.querySelector('.backgroundBideoa video');
-    if (!video) return;
-
-    video.setAttribute('autoplay', '');
-    video.setAttribute('muted', '');
-    video.setAttribute('loop', '');
-    video.setAttribute('playsinline', '');
-
-    video.muted = true;
-    video.play().catch(err => console.warn('Autoplay bloqueado en fondo:', err));
-  }
-
-  // 🎬 Reproducción controlada del vídeo principal
-  function controlVideoPrincipal() {
-    const video = document.getElementById('bideoNagusiaVideo');
-    if (!video) return;
-
-    video.pause();
-    video.muted = true;
-
-    video.closest('.bideoNagusia')?.addEventListener('click', () => {
-      if (video.paused) {
-        video.muted = false;
-        video.play();
-      } else {
-        video.pause();
-        video.muted = true;
-      }
-    });
-  }
-
-  // 🚀 Inicialización
-  maquinaDeEscribir();
-  gestionIdioma();
-  controlVideoPrincipal();
-  controlVideoFondo();
-
+  // 🌟 Animación de entrada
   document.body.classList.add('fade-in');
 });
+</script>
